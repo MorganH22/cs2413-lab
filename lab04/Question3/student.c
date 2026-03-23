@@ -54,8 +54,24 @@ struct TreeNode {
     struct TreeNode *left;
     struct TreeNode *right;
 };
+int dfs(struct TreeNode* node, int current) {
+    if (node == NULL) {
+        return 0;
+    }
+
+    current = current * 10 + node->val;
+
+    // if leaf node, return the number formed
+    if (node->left == NULL && node->right == NULL) {
+        return current;
+    }
+
+    // sum from left and right subtrees
+    return dfs(node->left, current) + dfs(node->right, current);
+}
 
 
 int sumNumbers(struct TreeNode* root) {
       // TODO: implement
+    return dfs(root, 0);
 }
